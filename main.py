@@ -3,7 +3,7 @@ from tkinter.filedialog import askdirectory
 import mutagen
 from mutagen.flac import FLAC
 from mutagen.id3 import ID3
-from mutagen.mp4 import MP4
+import json
 
 list_of_song = []
 
@@ -39,17 +39,7 @@ def directorychooser():
             album = ''.join(audiofile['album'])
             ogg_metadata = {'title': title, 'artist': artist, 'album': album}
             list_of_song.append(ogg_metadata)
-        elif files.endswith(".mp4"):
-            realdir4 = os.path.realpath(files)
-            audiofile_3 = MP4(realdir4)
-            # title, artist, album
-            title = audiofile_3['title']
-            artist = audiofile_3['artist']
-            album = audiofile_3['album']
-            mp4_metadata = {'title': title, 'artist': artist, 'album': album}
-            list_of_song.append(mp4_metadata)
-
 
 directorychooser()
 
-print(list_of_song)
+print(json.dumps(list_of_song, ensure_ascii= False))
